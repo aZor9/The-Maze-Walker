@@ -64,6 +64,7 @@ nav{
     background-color: white;
     position: sticky;
     top: 0px;
+    border: solid;
 }
 
 nav ul{
@@ -94,7 +95,7 @@ nav a{
 nav a:hover{
     color: green;
     font-weight: bold;
-    border-bottom: 2px solid purple;
+    border-bottom: 4px solid purple;
 }
 
 .conteneur{
