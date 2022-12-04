@@ -1,0 +1,104 @@
+body {	
+	background: linear-gradient(to right, #6609a0, #0b2a46, #054202);
+}
+
+.Titre {
+  text-align: center;
+  color: #fff;
+  height: 40px;
+}
+
+
+.colone_centrale {
+	text-align: center;
+}
+
+.button {
+  display: inline-block;
+  padding: 15px 35px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #329F5B;
+  border: none;
+  border-radius: 25px;
+  box-shadow: 0 7px #7D05C7;
+  transition: 0.3s;
+}
+
+.button:hover {
+  padding: 20px 45px;
+	background-color: #0B7335;
+	box-shadow: 0 9px #6609A0;
+  transition: 0.3s;
+}
+
+.button:active {
+  background-color: #075313;
+  box-shadow: 0 5px #6609A0;
+  transform: translateY(4px);
+  transition: 0.2s;
+}
+
+
+
+
+
+
+/*
+HTML CSSResult Skip Results Iframe
+EDIT ON
+Reset CSS*/
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+nav{
+    width: 100%;
+    margin: 0px auto 40px auto;
+    background-color: white;
+    position: sticky;
+    top: 0px;
+}
+
+nav ul{
+    list-style-type: none;
+}
+
+nav li{
+    float: left;
+    width: 25%;
+    text-align: center;
+}
+
+
+nav ul::after{
+    content: "";
+    display: table;
+    clear: both;
+}
+
+nav a{
+    display: block;
+    text-decoration: none;
+    color: black;
+    border-bottom: 2px solid transparent;
+    padding: 10px 0px;
+}
+
+nav a:hover{
+    color: green;
+    font-weight: bold;
+    border-bottom: 2px solid purple;
+}
+
+.conteneur{
+  margin: 0px 20px;
+  height: 1500px;
+}
+

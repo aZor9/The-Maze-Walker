@@ -1,0 +1,76 @@
+body {	
+	background: linear-gradient(to right, #6609a0, #0b2a46, #054202);
+}
+
+.Titre {
+  text-align: center;
+  color: #fff;
+  height: 40px;
+}
+
+.colone_centrale {
+	text-align: center;
+}
+
+
+.button {
+  display: inline-block;
+  padding: 15px 35px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #329F5B;
+  border: none;
+  border-radius: 25px;
+  box-shadow: 0 7px #7D05C7;
+  transition: 0.3s;
+}
+
+.button:hover {
+  	padding: 20px 45px;
+	background-color: #0B7335;
+	box-shadow: 0 9px #6609A0;
+  transition: 0.3s;
+}
+
+.button:active {
+  background-color: #075313;
+  box-shadow: 0 5px #6609A0;
+  transform: translateY(4px);
+  transition: 0.2s;
+}
+
+
+#blanco
+{
+width: 75%;
+border-radius:50px 50px;
+margin:0 auto;
+background: rgba(256, 256, 256, 0.30);
+transition: 0.5s;
+text-align: center;
+align-content: center;
+}
+
+#blanco:hover
+{
+width: 77%;
+border-radius:50px 50px;
+margin:0 auto;
+background: rgba(256, 256, 256, 0.35);
+text-align: center;
+align-content: center;
+}
+
+#lettre
+{
+width: 60%;
+border-radius:10px 10px;
+margin:0 auto;
+background: rgba(164, 126, 61, 0.75);
+text-align: center;
+align-content: center;
+}
