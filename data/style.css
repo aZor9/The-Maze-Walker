@@ -6,6 +6,7 @@ body {
   text-align: center;
   color: #fff;
   height: 40px;
+  font-size: 50px;
 }
 
 
@@ -64,6 +65,7 @@ nav{
     background-color: white;
     position: sticky;
     top: 0px;
+    font-size: 20px;
     /*border: solid;*/
 }
 
