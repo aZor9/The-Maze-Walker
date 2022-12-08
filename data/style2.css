@@ -1,6 +1,10 @@
 body {
 	background: linear-gradient(to right, #6609a0, #0b2a46, #054202);
+  font-size: 20px;
 }
+
+ 
+
 
 .Titre {
   text-align: center;
