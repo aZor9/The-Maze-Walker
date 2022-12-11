@@ -11,6 +11,10 @@ table {
   width: 75%;
 }
 
+th {
+  padding: 10px;
+  background-color: #AAA;
+}
 
 td {
   border: 1px solid #333;
