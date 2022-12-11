@@ -3,7 +3,19 @@ body {
   font-size: 20px;
 }
 
- 
+table {
+  background-color: #CCC;
+  text-align: center;
+  border-collapse: collapse;
+  border: 3px solid;
+  width: 75%;
+}
+
+
+td {
+  border: 1px solid #333;
+  padding: 10px;
+}
 
 
 .Titre {
