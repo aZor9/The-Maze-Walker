@@ -1,6 +1,7 @@
 body {
 	background: linear-gradient(to right, #6609a0, #0b2a46, #054202);
   font-size: 20px;
+  font-family : "Teko";
 }
 
 table {
@@ -26,6 +27,7 @@ td {
   text-align: center;
   color: #fff;
   height: 40px;
+  font-family : "Fredoka One";
 }
 
 .colone_centrale {
