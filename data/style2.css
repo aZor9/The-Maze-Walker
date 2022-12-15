@@ -98,6 +98,17 @@ text-align: center;
 align-content: center;
 }
 
+#Monologue
+{
+width: 60%;
+border-radius:45px;
+border: solid;
+margin:0 auto;
+background: #BBB;
+text-align: center;
+align-content: center;
+}
+
 #Retour {
 float: left;
 background-color : #BBB;
