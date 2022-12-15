@@ -1,6 +1,6 @@
 body {
 	background: linear-gradient(to right, #6609a0, #0b2a46, #054202);
-  font-size: 20px;
+  font-size: 22px;
   font-family : "Teko";
 }
 
@@ -100,8 +100,18 @@ align-content: center;
 
 #Retour {
 float: left;
-background-color : #DDD;
+background-color : #BBB;
 border-color: #158243;
 border-radius: 15px;
 padding: 5px;
+transition: 0.5s;
+font-family : "Teko";
+font-size: 17px;
+}
+
+#Retour:hover {
+background-color: #EEE;
+transition: 0.5s;
+border-radius: 13;
+padding: 7px;
 }
