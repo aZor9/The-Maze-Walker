@@ -10,6 +10,12 @@ table {
   border-collapse: collapse;
   border: 3px solid;
   width: 75%;
+  transition: 0.3s;
+}
+
+table:hover{
+  width: 77.5%;
+  transition: 0.3s;
 }
 
 th {
@@ -52,7 +58,7 @@ td {
 }
 
 .button:hover {
-  	padding: 20px 45px;
+  padding: 20px 45px;
 	background-color: #0B7335;
 	box-shadow: 0 9px #6609A0;
   transition: 0.3s;
