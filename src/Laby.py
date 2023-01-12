@@ -311,7 +311,38 @@ class Labyrinthe:
 
         return (newz, y, x)
         
- 
+    def note (self):
+        sauv = []          
+        for i in range(self.Xsecteur):
+            for j in range(self.Ysecteur):
+                if self.board[i][j] == 0:
+                    sauv.append(1)
+                else :
+                    sauv.append(0)
+        sauvstr = ''.join(map(str, sauv))
+        #print(sauvstr)
+        sauvints = int(sauvstr)
+        print(sauvints)
+        s = hex(sauvints)
+        with open ("save.txt", "w") as fichier:
+            fichier.write(s) # sauvegarde le èlaby dans un fichier texte autre 
+        #with open ("save.txt", "r") as fichier:
+            #fichier.read()   
+    
+    def denote(self):
+        with open("save.txt", "r" ) as fichier :
+            note = fichier.read()
+        #print (note)
+        notebin = note.split()
+        print(notebin[0])
+        notebin = int(notebin[0], 16)
+        print (notebin)
+        for i in range(self.Xsecteur):
+            for j in range(self.Ysecteur):
+                if self.board[i][j] == 0:
+                    sauv.append(1)
+                else :
+                    .append(0)
 
 LABY = Labyrinthe()
 print(LABY)
