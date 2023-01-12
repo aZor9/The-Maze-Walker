@@ -1,4 +1,5 @@
 from collections import deque
+#deque = liste doublement chainée
 
 class Pile:
     def __init__(self):
