@@ -17,9 +17,11 @@ class Pile:
         return len(self.deck) == 0
 
     def add(self,e):
+        #ajouter
         self.deck.append(e)
 
     def rem(self):
+        #enlever
         try:
             return self.deck.pop()
         except IndexError:
