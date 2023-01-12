@@ -158,6 +158,21 @@ class Labyrinthe:
             for j in range(41):
                 if i != 0 and i != 40 and j != 0 and j != 40:
                     self.megaboard[4][i][j].update(0)
+    
+    def __getitem__(self, y, x, z=None):
+        if z == None:
+            newz = 0
+            if y > 2*41+1:
+                newz = 6
+            elif y >= 41:
+                newz = 3
+            
+            if x >= 2*41+1:
+                newz += 2
+            elif x >= 41:
+                newz += 1                
+
+        return self.megaboard[newz][y][x]
 
     def __str__(self):
         """
@@ -269,11 +284,39 @@ class Labyrinthe:
         return ""
 
 
+    def getMegaIndex(z, y, x):
+        if z == 0: return (y, x)
+        elif z == 1: return (y, 41 + x)
+        elif z == 2: return (y, 2 * 41 + x)
+        elif z == 3: return (41 + y, x)
+        elif z == 4: return (41 + y, 41 + x)
+        elif z == 5: return (41 + y, 2 * 41 + x)
+        elif z == 6: return (2 * 41 + y, x)
+        elif z == 7: return (2 * 41 + y, 41 + x)
+        elif z == 8: return (2 * 41 + y, 2 * 41 + x)
+        else: return None
+    
+    def getBoardIndex(z, y, x):
+        if z == None:
+            newz = 0
+            if y > 2*41+1:
+                newz = 6
+            elif y >= 41:
+                newz = 3
+            
+            if x >= 2*41+1:
+                newz += 2
+            elif x >= 41:
+                newz += 1                
+
+        return (newz, y, x)
+        
+ 
 
 LABY = Labyrinthe()
 print(LABY)
 
 """
 Perfs :
-~1100ms pour générer un labyrinthe sur un ordinateur fixe type lycée. 
+~1100ms pour générer et afficher un labyrinthe sur un ordinateur fixe type lycée. 
 """
