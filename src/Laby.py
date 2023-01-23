@@ -73,7 +73,7 @@ class Secteur:
         self.board = [[Case() for k in range(self.Xsecteur)] for l in range(self.Ysecteur)] # que des murs
         for l in range(1, self.Ysecteur):
             for k in range(1, self.Xsecteur):
-                if l % 2 != 0 and k % 2 != 0: self.board[l][k].update(' ') #trous en quadrillage, 1 murs entre chaque trou (bordure ignorée)
+                if l % 2 != 0 and k % 2 != 0: self.board[l][k].update(' ') #trous en quadrillage, 1 mur entre chaque trou (bordure ignorée)
 
         # Part 2 : generate
         # L'algorithme de génération en lui-même (exploration exhaustive)
