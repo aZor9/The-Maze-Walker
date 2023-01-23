@@ -1,4 +1,5 @@
 from collections import deque
+#deque = liste doublement chainée
 
 class Pile:
     def __init__(self):
@@ -17,9 +18,11 @@ class Pile:
         return len(self.deck) == 0
 
     def add(self,e):
+        #ajouter
         self.deck.append(e)
 
     def rem(self):
+        #enlever
         try:
             return self.deck.pop()
         except IndexError:
