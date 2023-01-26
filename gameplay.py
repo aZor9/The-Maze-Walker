@@ -15,9 +15,9 @@ def proc2():
 def accueil():
   Write.Print("Bienvenue dans The Maze Walker \n", Colors.white, interval=0.05)
   action = Write.Input("Que souhaitez-vous faire ? \n\
-Parametres - Jouer - Quitter \n", Colors.white, interval=0.05)
+Paramètres - Jouer - Quitter \n", Colors.white, interval=0.05)
 
-  if action.lower() == "parametres":
+  if action.lower() == "parametres" or "paramètres":
     param.parametres()
 
   if action.lower() == "jouer":

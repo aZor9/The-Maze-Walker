@@ -19,8 +19,8 @@ def debut():
 Cette lettre est la sixième, une par jour depuis le jour où tout a basculé. \n\
 Avant j’avais une vie lambda, vide d’émotions, ni famille, ni amis.\n\
 Je ne sais même pas si quelqu’un lira un jour cette lettre. \n\
-Je ne sais ni où je suis, ni pourquoi j’y suis… je veux sortir.. \n\
-J’essaierais ce soir…\n"))
+Je ne sais ni où je suis, ni pourquoi j’y suis… l'atmosphère est particulière, je veux sortir.. \n\
+J’essaierai ce soir…\n"))
     Write.Print(texte, Colors.white, interval=0.025)
     print("")
 
