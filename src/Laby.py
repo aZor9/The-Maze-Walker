@@ -345,9 +345,10 @@ class Labyrinthe:
         for i in range(self.Xsecteur):
             for j in range(self.Ysecteur):
                 if self.board[i][j] == 0:
-                    sauv.append(1)
+                    self.board[i][j] = 0
                 else :
-                    .append(0)
+                    self.board[i][j] = 'X'
+        print(self.board)
 
 LABY = Labyrinthe()
 print(LABY)
