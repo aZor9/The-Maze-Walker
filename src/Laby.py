@@ -67,7 +67,7 @@ class Secteur:
         return V
 
 
-    def gen(self): #génère un labyrinthe avec les coordonnées du secteur (constante, X and Y = 41)
+    def gen(self): #génère un labyrinthe avec les coordonnées du secteur
 
         # Part 1 : initialize
         self.board = [[Case() for k in range(self.Xsecteur)] for l in range(self.Ysecteur)] # que des murs
@@ -135,7 +135,7 @@ class Secteur:
 
 class Labyrinthe:
 
-    def __init__(self):
+    def __init__(self, Y, X):
 
         #liste entrées
         params = [('S', 'E'), ('W', 'E'), ('W', 'S'), ('N', 'S'), (0, 0), ('N', 'S'), ('N', 'E'), ('W', 'E'), ('N', 'W')]
@@ -143,7 +143,7 @@ class Labyrinthe:
         # on défini labyrinthe comme étant une liste de 9 secteurs
         self.megaboard = []
         for i in range(9):
-            self.megaboard.append(Secteur(41, 41, params[i][0], params[i][1]))
+            self.megaboard.append(Secteur(self.Ysecteur, self.Xsecteur, params[i][0], params[i][1]))
             self.megaboard[i].gen()
 
         # comme le secteur 4 (le bloc) doit être relié horizontalement et verticalement aux autres:
@@ -158,26 +158,33 @@ class Labyrinthe:
         self.megaboard[7][0][21].update(0)
 
         # le secteur 4 (le bloc) n'est pas un labyrinthe, c'est un espace vide (bordures ignorées)
-        for i in range(41):
-            for j in range(41):
+        for i in range(len(self.Ysecteur)):
+            for j in range(len(self.Xsecteur)):
                 if i != 0 and i != 40 and j != 0 and j != 40:
                     self.megaboard[4][i][j].update(0)
 
-    def __getitem__(self, y, x, z=None):
+    def __getitem__(self,tpl:tuple):
         """On peut accéder au megaboard avec 2 ou 3 coordonnées, la 3°, facultative, spécifie le secteur"""
+        y = tpl[0]
+        x = tpl[1]
+        if len(tpl) > 2: z = tpl[2]
+        else: z = None
+
         if z == None:
             newz = 0
-            if y > 2*41+1:
+            if y > 2*self.Ysecteur+1:
                 newz = 6
-            elif y >= 41:
+            elif y >= self.Ysecteur:
                 newz = 3
 
-            if x >= 2*41+1:
+            if x >= 2*self.Xsecteur+1:
                 newz += 2
-            elif x >= 41:
+            elif x >= self.Xsecteur:
                 newz += 1
 
         return self.megaboard[newz][y][x]
+
+
 
     def __str__(self):
         """
@@ -193,9 +200,9 @@ class Labyrinthe:
         C'est peut-être pas clair comment j'explique mais c'est compliqué (Labyrinthe est en 4 dimensions, 2° dimension de 2° dimension)
         """
 
-        for k in range(41):
+        for k in range(self.Xsecteur):
 
-            for q in range(41):
+            for q in range(self.Ysecteur):
                 pointer = str(self.megaboard[0][k][q])
                 try: pointer = int(pointer)
                 except: pass
@@ -204,7 +211,7 @@ class Labyrinthe:
                 else:
                     print(pointer, end="")
 
-            for q in range(41):
+            for q in range(self.Ysecteur):
                 pointer = str(self.megaboard[1][k][q])
                 try: pointer = int(pointer)
                 except: pass
@@ -213,7 +220,7 @@ class Labyrinthe:
                 else:
                     print(pointer, end="")
 
-            for q in range(41):
+            for q in range(self.Ysecteur):
                 pointer = str(self.megaboard[2][k][q])
                 try: pointer = int(pointer)
                 except: pass
@@ -224,9 +231,9 @@ class Labyrinthe:
 
             print("")
 
-        for k in range(41):
+        for k in range(self.Xsecteur):
 
-            for q in range(41):
+            for q in range(self.Ysecteur):
                 pointer = str(self.megaboard[3][k][q])
                 try: pointer = int(pointer)
                 except: pass
@@ -235,7 +242,7 @@ class Labyrinthe:
                 else:
                     print(pointer, end="")
 
-            for q in range(41):
+            for q in range(self.Ysecteur):
                 pointer = str(self.megaboard[4][k][q])
                 try: pointer = int(pointer)
                 except: pass
@@ -244,7 +251,7 @@ class Labyrinthe:
                 else:
                     print(pointer, end="")
 
-            for q in range(41):
+            for q in range(self.Ysecteur):
                 pointer = str(self.megaboard[5][k][q])
                 try: pointer = int(pointer)
                 except: pass
@@ -255,9 +262,9 @@ class Labyrinthe:
 
             print("")
 
-        for k in range(41):
+        for k in range(self.Xsecteur):
 
-            for q in range(41):
+            for q in range(self.Ysecteur):
                 pointer = str(self.megaboard[6][k][q])
                 try: pointer = int(pointer)
                 except: pass
@@ -266,7 +273,7 @@ class Labyrinthe:
                 else:
                     print(pointer, end="")
 
-            for q in range(41):
+            for q in range(self.Ysecteur):
                 pointer = str(self.megaboard[7][k][q])
                 try: pointer = int(pointer)
                 except: pass
@@ -275,7 +282,7 @@ class Labyrinthe:
                 else:
                     print(pointer, end="")
 
-            for q in range(41):
+            for q in range(self.Ysecteur):
                 pointer = str(self.megaboard[8][k][q])
                 try: pointer = int(pointer)
                 except: pass
@@ -291,33 +298,33 @@ class Labyrinthe:
 
     def getMegaIndex(z, y, x):
         if z == 0: return (y, x)
-        elif z == 1: return (y, 41 + x)
-        elif z == 2: return (y, 2 * 41 + x)
-        elif z == 3: return (41 + y, x)
-        elif z == 4: return (41 + y, 41 + x)
-        elif z == 5: return (41 + y, 2 * 41 + x)
-        elif z == 6: return (2 * 41 + y, x)
-        elif z == 7: return (2 * 41 + y, 41 + x)
-        elif z == 8: return (2 * 41 + y, 2 * 41 + x)
+            elif z == 1: return (y, self.Xsecteur + x)
+        elif z == 2: return (y, 2 * self.Xsecteur + x)
+        elif z == 3: return (self.Ysecteur + y, x)
+        elif z == 4: return (self.Ysecteur + y, self.Xsecteur + x)
+        elif z == 5: return (self.Ysecteur + y, 2 * self.Xsecteur + x)
+        elif z == 6: return (2 * self.Ysecteur + y, x)
+        elif z == 7: return (2 * self.Ysecteur + y, self.Xsecteur + x)
+        elif z == 8: return (2 * self.Ysecteur + y, 2 * self.Xsecteur + x)
         else: return None
 
     def getBoardIndex(z, y, x):
         if z == None:
             newz = 0
-            if y > 2*41+1:
+            if y > 2*self.Ysecteur+1:
                 newz = 6
-            elif y >= 41:
+            elif y >= self.Ysecteur:
                 newz = 3
 
-            if x >= 2*41+1:
+            if x >= 2*self.Xsecteur+1:
                 newz += 2
-            elif x >= 41:
+            elif x >= self.Ysecteur:
                 newz += 1
 
         return (newz, y, x)
-        
+
     def note (self):
-        sauv = []          
+        sauv = []
         for i in range(self.Xsecteur):
             for j in range(self.Ysecteur):
                 if self.board[i][j] == 0:
@@ -330,10 +337,10 @@ class Labyrinthe:
         print(sauvints)
         s = hex(sauvints)
         with open ("save.txt", "w") as fichier:
-            fichier.write(s) # sauvegarde le èlaby dans un fichier texte autre 
+            fichier.write(s) # sauvegarde le èlaby dans un fichier texte autre
         #with open ("save.txt", "r") as fichier:
-            #fichier.read()   
-    
+            #fichier.read()
+
     def denote(self):
         with open("save.txt", "r" ) as fichier :
             note = fichier.read()
@@ -355,5 +362,5 @@ print(LABY)
 
 """
 Perfs :
-~1100ms pour générer et afficher un labyrinthe sur un ordinateur fixe type lycée. 
+~1100ms pour générer et afficher un labyrinthe sur un ordinateur fixe type lycée.
 """
