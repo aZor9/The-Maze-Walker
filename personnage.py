@@ -18,13 +18,13 @@ class character():
 	def droite(self):
 		self.position[1] += self.vitesse
 		return self.position
-	def gauche(self, var):
+	def gauche(self):
 		self.position[1] -= self.vitesse
 		return self.position
-	def haut(self, var):
+	def haut(self):
 		self.position[0] -= self.vitesse
 		return self.position
-	def bas(self, var):
+	def bas(self):
 		self.position[0] += self.vitesse
 		return self.position
 
