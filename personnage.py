@@ -12,24 +12,24 @@ class character():
 	def vie(self, *args):
 		if *args != None :
 			self.point_de_vie += *args
-		return point_de_vie
+		return self.point_de_vie
 
 #changement de la position du personnage <- déplacement
-	def droite(self, var):
-		position[1] =+ 1
-		return position
+	def droite(self):
+		self.position[1] += self.vitesse
+		return self.position
 	def gauche(self, var):
-		position[1] =+ -1
-		return position
+		self.position[1] -= self.vitesse
+		return self.position
 	def haut(self, var):
-		position[0] =+ -1
-		return position
+		self.position[0] -= self.vitesse
+		return self.position
 	def bas(self, var):
-		position[0] =+ 1
-		return position
+		self.position[0] += self.vitesse
+		return self.position
 
 #renvois de la vitesse avec/sans avec changement de valement
-	def vie(self, *args):
+	def vitesse(self, *args):
 		if *args != None :
 			self.vitesse += *args
-		return vitesse
+		return self.vitesse
