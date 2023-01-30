@@ -3,10 +3,12 @@ from Pile import Pile
 #cords (YX)
 
 class Case:
+    """Case est le composant de chaque item dans les listes du labyrinthe
+    Il y a des objets Case() à tous les index"""
 
     def __init__(self, e = False):
         if not e:
-            self.state = 'X'
+            self.state = 'X' #Si aucun argument n'est passé dans l'appel de Case(), initialise le contenu à str('X')
         else:
             self.state = e
 
@@ -17,15 +19,17 @@ class Case:
         if isinstance(self.state, int):
             return self.state
         else:
-            return -418
+            return -418 #Si le contenu de la case n'est pas int, renvoie -418 || ne converti pas les chiffres str en int
 
-    def update(self, e):
+    def update(self, e):  #seule fonction pour la case,, cchange le contenu en e
         self.state = e
         return self
 
 class Secteur:
 
     def __init__(self, Xsecteur: int, Ysecteur: int, entree = False, sortie = False) -> None:
+        """Xsecteur et Ysecteur la taille, initialement à 41 (peut changer dans le futur)
+        entree et sortie deux Cases qui vont être rendues vides, sur les bordures"""
         self.Xsecteur = Xsecteur
         self.Ysecteur = Ysecteur
         self.entree = entree
@@ -69,10 +73,10 @@ class Secteur:
         self.board = [[Case() for k in range(self.Xsecteur)] for l in range(self.Ysecteur)] # que des murs
         for l in range(1, self.Ysecteur):
             for k in range(1, self.Xsecteur):
-                if l % 2 != 0 and k % 2 != 0: self.board[l][k].update(' ') #trous en quadrillage, 1 murs entre chaque trou (bordure ignorée)
+                if l % 2 != 0 and k % 2 != 0: self.board[l][k].update(' ') #trous en quadrillage, 1 mur entre chaque trou (bordure ignorée)
 
         # Part 2 : generate
-        # L'algorithme de génération en lui-même (exploration exhaustive) 
+        # L'algorithme de génération en lui-même (exploration exhaustive)
         stack = Pile()
         voisins = []
 
@@ -158,19 +162,20 @@ class Labyrinthe:
             for j in range(41):
                 if i != 0 and i != 40 and j != 0 and j != 40:
                     self.megaboard[4][i][j].update(0)
-    
+
     def __getitem__(self, y, x, z=None):
+        """On peut accéder au megaboard avec 2 ou 3 coordonnées, la 3°, facultative, spécifie le secteur"""
         if z == None:
             newz = 0
             if y > 2*41+1:
                 newz = 6
             elif y >= 41:
                 newz = 3
-            
+
             if x >= 2*41+1:
                 newz += 2
             elif x >= 41:
-                newz += 1                
+                newz += 1
 
         return self.megaboard[newz][y][x]
 
@@ -295,7 +300,7 @@ class Labyrinthe:
         elif z == 7: return (2 * 41 + y, 41 + x)
         elif z == 8: return (2 * 41 + y, 2 * 41 + x)
         else: return None
-    
+
     def getBoardIndex(z, y, x):
         if z == None:
             newz = 0
@@ -303,11 +308,11 @@ class Labyrinthe:
                 newz = 6
             elif y >= 41:
                 newz = 3
-            
+
             if x >= 2*41+1:
                 newz += 2
             elif x >= 41:
-                newz += 1                
+                newz += 1
 
         return (newz, y, x)
         
@@ -340,9 +345,10 @@ class Labyrinthe:
         for i in range(self.Xsecteur):
             for j in range(self.Ysecteur):
                 if self.board[i][j] == 0:
-                    sauv.append(1)
+                    self.board[i][j] = 0
                 else :
-                    .append(0)
+                    self.board[i][j] = 'X'
+        print(self.board)
 
 LABY = Labyrinthe()
 print(LABY)
