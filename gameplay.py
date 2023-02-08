@@ -2,13 +2,22 @@ from pystyle import *
 from textes import debut
 import param
 import threading
+from personnage import character
 
-def proc():
-  debut()
+def jeu():
+  #debut()
   import Laby
-  Laby.Labyrinthe()
+  LABY = Laby.Labyrinthe(51,51)
+  print(LABY)
+  player = character(50, [75, 75], "", 1, LABY)
+  print(LABY)
+  player.haut()
+  player.haut()
+  player.droite()
+  player.blit(LABY)
+  print(LABY)
 
-def proc2():
+def fctemps():
   import temps
   temps.calctemps()
 
@@ -17,7 +26,7 @@ def accueil():
   action = Write.Input("Que souhaitez-vous faire ? \n\
 Paramètres - Jouer - Quitter \n", Colors.white, interval=0.05)
 
-  if action.lower() == "parametres" or "paramètres":
+  if action.lower() == "parametres":
     param.parametres()
 
   if action.lower() == "jouer":
@@ -27,8 +36,8 @@ Paramètres - Jouer - Quitter \n", Colors.white, interval=0.05)
   if action.lower() == "quitter":
     quit()
 
-th1 = threading.Thread(target=proc)
-th2 = threading.Thread(target=proc2)
+th1 = threading.Thread(target=jeu)
+th2 = threading.Thread(target=fctemps)
 
 if __name__ == "__main__":
   accueil()
