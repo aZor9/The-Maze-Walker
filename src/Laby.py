@@ -27,13 +27,14 @@ class Case:
 
 class Secteur:
 
-    def __init__(self, Xsecteur: int, Ysecteur: int, entree = False, sortie = False) -> None:
+    def __init__(self, Xsecteur: int, Ysecteur: int, entree = False, sortie = False, no_secteur=False) -> None:
         """Xsecteur et Ysecteur la taille, initialement à 41 (peut changer dans le futur)
         entree et sortie deux Cases qui vont être rendues vides, sur les bordures"""
-        self.Xsecteur = Xsecteur
-        self.Ysecteur = Ysecteur
+        self.X = Xsecteur
+        self.Y = Ysecteur
         self.entree = entree
         self.sortie = sortie
+        self.no_secteur = no_secteur
 
     def __str__(self):
         for q in range(len(self.board)):
@@ -56,11 +57,11 @@ class Secteur:
         V = []
         i, j = v[0], v[1]
         for a in (-2, 2):
-            if 0 <= i + a < self.Ysecteur:
+            if 0 <= i + a < self.Y:
                 if str(self.board[i + a][j]) == ' ':
                     #self.board[i + a][j] = '*'
                     V.append((i + a, j))
-            if 0 <= j + a < self.Xsecteur:
+            if 0 <= j + a < self.X:
                 if str(self.board[i][j + a]) == ' ':
                     #self.board[i][j + a] = '*'
                     V.append((i, j + a))
@@ -70,9 +71,9 @@ class Secteur:
     def gen(self): #génère un labyrinthe avec les coordonnées du secteur
 
         # Part 1 : initialize
-        self.board = [[Case() for k in range(self.Xsecteur)] for l in range(self.Ysecteur)] # que des murs
-        for l in range(1, self.Ysecteur):
-            for k in range(1, self.Xsecteur):
+        self.board = [[Case() for k in range(self.X)] for l in range(self.Y)] # que des murs
+        for l in range(1, self.Y):
+            for k in range(1, self.X):
                 if l % 2 != 0 and k % 2 != 0: self.board[l][k].update(' ') #trous en quadrillage, 1 mur entre chaque trou (bordure ignorée)
 
         # Part 2 : generate
@@ -80,7 +81,7 @@ class Secteur:
         stack = Pile()
         voisins = []
 
-        cords = (int((self.Ysecteur-1)/2)-1, int((self.Xsecteur-1)/2)+1) #position angle superieur droit par rapport au centre de self.board
+        cords = (int((self.Y-1)/2)-1, int((self.X-1)/2)+1) #position angle superieur droit par rapport au centre de self.board
         voisins = self.voisins((cords[0], cords[1]))
         #self.board[cords[0]][cords[1]] = "5" #start point
 
@@ -110,6 +111,7 @@ class Secteur:
         sel = []
         # creusage entree et sortie
         #si entree ou sortie pas définit dans l'appel de la class, on en génère deux
+
         if not self.entree or not self.sortie:
             directions = ['N', 'E', 'S', 'W']
             sel.append(choice(directions))
@@ -122,45 +124,49 @@ class Secteur:
             sel.append(self.sortie)
 
         #on casse les block N/E/S/W selon les choisis
+        if self.entree == 0 and self.sortie == 0:
+            return "Generated !"
         for d in sel:
-            if d == 'N': self.board[0][int((self.Xsecteur+1)/2)].update(0)
-            elif d == 'S': self.board[-1][int((self.Xsecteur+1)/2)].update(0)
-            elif d == 'W': self.board[int((self.Ysecteur+1)/2)][0].update(0)
-            elif d == 'E': self.board[int((self.Ysecteur+1)/2)][-1].update(0)
+            if d == 'N': self.board[0][int((self.X+1)/2)].update(0)
+            elif d == 'S': self.board[-1][int((self.X+1)/2)].update(0)
+            elif d == 'W': self.board[int((self.Y+1)/2)][0].update(0)
+            elif d == 'E': self.board[int((self.Y+1)/2)][-1].update(0)
             else:
                 pass
-
         return "Generated !"
 
 
 class Labyrinthe:
 
     def __init__(self, Y, X):
-
+        self.Y, self.X = Y, X
         #liste entrées
         params = [('S', 'E'), ('W', 'E'), ('W', 'S'), ('N', 'S'), (0, 0), ('N', 'S'), ('N', 'E'), ('W', 'E'), ('N', 'W')]
 
         # on défini labyrinthe comme étant une liste de 9 secteurs
         self.megaboard = []
         for i in range(9):
-            self.megaboard.append(Secteur(self.Ysecteur, self.Xsecteur, params[i][0], params[i][1]))
+            sect = Secteur(self.Y, self.X, params[i][0], params[i][1])
+            sect.gen()
+            self.megaboard.append(sect)
             self.megaboard[i].gen()
 
         # comme le secteur 4 (le bloc) doit être relié horizontalement et verticalement aux autres:
-        self.megaboard[4][-1][21].update(0)
-        self.megaboard[4][21][-1].update(0)
-        self.megaboard[4][21][0].update(0)
-        self.megaboard[4][0][21].update(0)
+        mid = self.Y // 2
+        self.megaboard[4][-1][mid].update(0)
+        self.megaboard[4][mid][-1].update(0)
+        self.megaboard[4][mid][0].update(0)
+        self.megaboard[4][0][mid].update(0)
 
-        self.megaboard[1][-1][21].update(0)
-        self.megaboard[3][21][-1].update(0)
-        self.megaboard[5][21][0].update(0)
-        self.megaboard[7][0][21].update(0)
+        self.megaboard[1][-1][mid].update(0)
+        self.megaboard[3][mid][-1].update(0)
+        self.megaboard[5][mid][0].update(0)
+        self.megaboard[7][0][mid].update(0)
 
         # le secteur 4 (le bloc) n'est pas un labyrinthe, c'est un espace vide (bordures ignorées)
-        for i in range(len(self.Ysecteur)):
-            for j in range(len(self.Xsecteur)):
-                if i != 0 and i != 40 and j != 0 and j != 40:
+        for i in range(self.Y):
+            for j in range(self.X):
+                if i != 0 and i != self.Y-1 and j != 0 and j != self.X-1:
                     self.megaboard[4][i][j].update(0)
 
     def __getitem__(self,tpl:tuple):
@@ -172,15 +178,18 @@ class Labyrinthe:
 
         if z == None:
             newz = 0
-            if y > 2*self.Ysecteur+1:
+            if y > 2*self.Y+1:
                 newz = 6
-            elif y >= self.Ysecteur:
+                y -= 2*self.Y
+            elif y >= self.Y:
                 newz = 3
-
-            if x >= 2*self.Xsecteur+1:
+                y -= self.Y
+            if x >= 2*self.X+1:
                 newz += 2
-            elif x >= self.Xsecteur:
+                x -= 2*self.X
+            elif x >= self.X:
                 newz += 1
+                x -= self.X
 
         return self.megaboard[newz][y][x]
 
@@ -200,94 +209,94 @@ class Labyrinthe:
         C'est peut-être pas clair comment j'explique mais c'est compliqué (Labyrinthe est en 4 dimensions, 2° dimension de 2° dimension)
         """
 
-        for k in range(self.Xsecteur):
+        for k in range(self.X):
 
-            for q in range(self.Ysecteur):
+            for q in range(self.Y):
                 pointer = str(self.megaboard[0][k][q])
                 try: pointer = int(pointer)
                 except: pass
                 if pointer == 0:
-                    print(" ", end="")
+                    print(" ", end="")
                 else:
                     print(pointer, end="")
 
-            for q in range(self.Ysecteur):
+            for q in range(self.Y):
                 pointer = str(self.megaboard[1][k][q])
                 try: pointer = int(pointer)
                 except: pass
                 if pointer == 0:
-                    print(" ", end="")
+                    print(" ", end="")
                 else:
                     print(pointer, end="")
 
-            for q in range(self.Ysecteur):
+            for q in range(self.Y):
                 pointer = str(self.megaboard[2][k][q])
                 try: pointer = int(pointer)
                 except: pass
                 if pointer == 0:
-                    print(" ", end="")
+                    print(" ", end="")
                 else:
                     print(pointer, end="")
 
             print("")
 
-        for k in range(self.Xsecteur):
+        for k in range(self.X):
 
-            for q in range(self.Ysecteur):
+            for q in range(self.Y):
                 pointer = str(self.megaboard[3][k][q])
                 try: pointer = int(pointer)
                 except: pass
                 if pointer == 0:
-                    print(" ", end="")
+                    print(" ", end="")
                 else:
                     print(pointer, end="")
 
-            for q in range(self.Ysecteur):
+            for q in range(self.Y):
                 pointer = str(self.megaboard[4][k][q])
                 try: pointer = int(pointer)
                 except: pass
                 if pointer == 0:
-                    print(" ", end="")
+                    print(" ", end="")
                 else:
                     print(pointer, end="")
 
-            for q in range(self.Ysecteur):
+            for q in range(self.Y):
                 pointer = str(self.megaboard[5][k][q])
                 try: pointer = int(pointer)
                 except: pass
                 if pointer == 0:
-                    print(" ", end="")
+                    print(" ", end="")
                 else:
                     print(pointer, end="")
 
             print("")
 
-        for k in range(self.Xsecteur):
+        for k in range(self.X):
 
-            for q in range(self.Ysecteur):
+            for q in range(self.Y):
                 pointer = str(self.megaboard[6][k][q])
                 try: pointer = int(pointer)
                 except: pass
                 if pointer == 0:
-                    print(" ", end="")
+                    print(" ", end="")
                 else:
                     print(pointer, end="")
 
-            for q in range(self.Ysecteur):
+            for q in range(self.Y):
                 pointer = str(self.megaboard[7][k][q])
                 try: pointer = int(pointer)
                 except: pass
                 if pointer == 0:
-                    print(" ", end="")
+                    print(" ", end="")
                 else:
                     print(pointer, end="")
 
-            for q in range(self.Ysecteur):
+            for q in range(self.Y):
                 pointer = str(self.megaboard[8][k][q])
                 try: pointer = int(pointer)
                 except: pass
                 if pointer == 0:
-                    print(" ", end="")
+                    print(" ", end="")
                 else:
                     print(pointer, end="")
 
@@ -296,37 +305,37 @@ class Labyrinthe:
         return ""
 
 
-    def getMegaIndex(z, y, x):
+    def getMegaIndex(self, z, y, x):
         if z == 0: return (y, x)
-            elif z == 1: return (y, self.Xsecteur + x)
-        elif z == 2: return (y, 2 * self.Xsecteur + x)
-        elif z == 3: return (self.Ysecteur + y, x)
-        elif z == 4: return (self.Ysecteur + y, self.Xsecteur + x)
-        elif z == 5: return (self.Ysecteur + y, 2 * self.Xsecteur + x)
-        elif z == 6: return (2 * self.Ysecteur + y, x)
-        elif z == 7: return (2 * self.Ysecteur + y, self.Xsecteur + x)
-        elif z == 8: return (2 * self.Ysecteur + y, 2 * self.Xsecteur + x)
+        elif z == 1: return (y, self.X + x)
+        elif z == 2: return (y, 2 * self.X + x)
+        elif z == 3: return (self.Y + y, x)
+        elif z == 4: return (self.Y + y, self.X + x)
+        elif z == 5: return (self.Y + y, 2 * self.X + x)
+        elif z == 6: return (2 * self.Y + y, x)
+        elif z == 7: return (2 * self.Y + y, self.X + x)
+        elif z == 8: return (2 * self.Y + y, 2 * self.X + x)
         else: return None
 
-    def getBoardIndex(z, y, x):
+    def getBoardIndex(self, z, y, x):
         if z == None:
             newz = 0
-            if y > 2*self.Ysecteur+1:
+            if y > 2*self.Y+1:
                 newz = 6
-            elif y >= self.Ysecteur:
+            elif y >= self.Y:
                 newz = 3
 
-            if x >= 2*self.Xsecteur+1:
+            if x >= 2*self.X+1:
                 newz += 2
-            elif x >= self.Ysecteur:
+            elif x >= self.Y:
                 newz += 1
 
         return (newz, y, x)
 
     def note (self):
         sauv = []
-        for i in range(self.Xsecteur):
-            for j in range(self.Ysecteur):
+        for i in range(self.X):
+            for j in range(self.Y):
                 if self.board[i][j] == 0:
                     sauv.append(1)
                 else :
@@ -349,15 +358,16 @@ class Labyrinthe:
         print(notebin[0])
         notebin = int(notebin[0], 16)
         print (notebin)
-        for i in range(self.Xsecteur):
-            for j in range(self.Ysecteur):
+        for i in range(self.X):
+            for j in range(self.Y):
                 if self.board[i][j] == 0:
                     self.board[i][j] = 0
                 else :
                     self.board[i][j] = 'X'
         print(self.board)
 
-LABY = Labyrinthe()
+
+LABY = Labyrinthe(51, 51)
 print(LABY)
 
 """
