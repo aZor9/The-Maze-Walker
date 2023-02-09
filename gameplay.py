@@ -7,14 +7,11 @@ from personnage import character
 def jeu():
   #debut()
   import Laby
-  LABY = Laby.Labyrinthe(51,51)
-  print(LABY)
+  LABY = Laby.Labyrinthe()
   player = character(50, [75, 75], "", 1, LABY)
   print(LABY)
-  player.haut()
-  player.haut()
-  player.droite()
-  player.blit(LABY)
+  print(player.position)
+  LABY.blit(player.position, player.haut())
   print(LABY)
 
 def fctemps():
@@ -40,4 +37,5 @@ th1 = threading.Thread(target=jeu)
 th2 = threading.Thread(target=fctemps)
 
 if __name__ == "__main__":
-  accueil()
+    th1.start()
+    #accueil()
