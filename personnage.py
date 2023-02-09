@@ -5,6 +5,7 @@ class character():
 	def __init__(self, pdv, p, m, v, board):
 		self.point_de_vie = pdv
 		self.position = p
+		self.main = m
 		self.speed = v
 		self.blit(board)
 
