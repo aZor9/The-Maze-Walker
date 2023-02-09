@@ -11,7 +11,7 @@ def jeu():
   player = character(50, [3, 3], "", 1, LABY)
   LABY.blit(player.haut(), 'P')
   print(LABY)
-  LABY.blit(player.droite())
+  LABY.blit(player.droite(), 'P')
   print(LABY)
 
 def fctemps():
