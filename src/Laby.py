@@ -354,10 +354,9 @@ class Labyrinthe:
                     self.board[i][j].update('X')
         print(self.board)
 
-    def blit(self, coos, char=False):
+    def blit(self, coos, char):
         oldcoos = (coos[0][0], coos[0][1])
         newcoos = (coos[1][0], coos[1][1])
-        if not char: char= str(self[oldcoos])
         self[oldcoos].update(' ')
         self[newcoos].update(char)
 
