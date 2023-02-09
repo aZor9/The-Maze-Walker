@@ -354,14 +354,13 @@ class Labyrinthe:
                     self.board[i][j].update('X')
         print(self.board)
 
-    def blit(self, oldcoos, coos):
-        char = self.megaboard[oldcoos]
-        self.megaboard[oldcoos].update(' ')
-        self.megaboard[coos].update(char)
+    def blit(self, coos, char=False):
+        oldcoos = (coos[0][0], coos[0][1])
+        newcoos = (coos[1][0], coos[1][1])
+        if not char: char= str(self[oldcoos])
+        self[oldcoos].update(' ')
+        self[newcoos].update(char)
 
-
-LABY = Labyrinthe()
-print(LABY)
 
 """
 Perfs :
