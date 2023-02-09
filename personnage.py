@@ -1,5 +1,4 @@
-print("hello world")
-
+from copy import deepcopy
 
 class character():
 	def __init__(self, pdv, p, m, v, board):
@@ -7,14 +6,10 @@ class character():
 		self.position = p
 		self.main = m
 		self.speed = v
-		self.blit(board)
+		self.board = board
 
 	def __str__(self):
 		return "P"
-	
-	def blit(self, board):
-		board[self.position]
-		return board
 
 #renvoi des points de vie avec/sans avec changement de valement
 	def vie(self, *args):
@@ -24,17 +19,29 @@ class character():
 
 #changement de la position du personnage <- déplacement
 	def droite(self):
+		old = deepcopy(self.position)
+		self.board[self.position].update(' ')
 		self.position[1] += self.speed
-		return self.position
+		self.board[self.position].update('P')
+		return old, self.position
 	def gauche(self):
+		old = deepcopy(self.position)
+		self.board[self.position].update(' ')
 		self.position[1] -= self.speed
-		return self.position
+		self.board[self.position].update('P')
+		return old, self.position
 	def haut(self):
+		old = deepcopy(self.position)
+		self.board[self.position].update(' ')
 		self.position[0] -= self.speed
-		return self.position
+		self.board[self.position].update('P')
+		return old, self.position
 	def bas(self):
+		old = deepcopy(self.position)
+		self.board[self.position].update(' ')
 		self.position[0] += self.speed
-		return self.position
+		self.board[self.position].update('P')
+		return old, self.position
 
 #renvoi de la vitesse avec/sans avec changement de valement
 	def vitesse(self, *args):
