@@ -13,7 +13,7 @@ class character():
 		return "P"
 	
 	def blit(self, board):
-		board[self.position[0]][self.position[1]] = str(self)
+		board[self.position]
 		return board
 
 #renvoi des points de vie avec/sans avec changement de valement
@@ -24,20 +24,20 @@ class character():
 
 #changement de la position du personnage <- déplacement
 	def droite(self):
-		self.position[1] += self.vitesse
+		self.position[1] += self.speed
 		return self.position
 	def gauche(self):
-		self.position[1] -= self.vitesse
+		self.position[1] -= self.speed
 		return self.position
 	def haut(self):
-		self.position[0] -= self.vitesse
+		self.position[0] -= self.speed
 		return self.position
 	def bas(self):
-		self.position[0] += self.vitesse
+		self.position[0] += self.speed
 		return self.position
 
 #renvoi de la vitesse avec/sans avec changement de valement
 	def vitesse(self, *args):
 		if args != None :
-			self.vitesse += args
-		return self.vitesse
+			self.speed += args
+		return self.speed
