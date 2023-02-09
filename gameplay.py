@@ -8,10 +8,10 @@ def jeu():
   #debut()
   import Laby
   LABY = Laby.Labyrinthe()
-  player = character(50, [75, 75], "", 1, LABY)
+  player = character(50, [3, 3], "", 1, LABY)
+  LABY.blit(player.haut(), 'P')
   print(LABY)
-  print(player.position)
-  LABY.blit(player.position, player.haut())
+  LABY.blit(player.droite())
   print(LABY)
 
 def fctemps():
