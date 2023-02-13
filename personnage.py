@@ -20,24 +20,31 @@ class character():
 #changement de la position du personnage <- déplacement
 	def droite(self):
 		old = deepcopy(self.position)
+		if self.board[(self.position[0], self.position[1] + 1)].state == "X": return ""
 		self.board[self.position].update(' ')
 		self.position[1] += self.speed
 		self.board[self.position].update('P')
 		return old, self.position
+		
 	def gauche(self):
 		old = deepcopy(self.position)
+		if self.board[(self.position[0], self.position[1]-1)].state == "X": return
 		self.board[self.position].update(' ')
 		self.position[1] -= self.speed
 		self.board[self.position].update('P')
 		return old, self.position
+		
 	def haut(self):
 		old = deepcopy(self.position)
+		if self.board[(self.position[0] - 1, self.position[1])].state == "X": return ""
 		self.board[self.position].update(' ')
 		self.position[0] -= self.speed
 		self.board[self.position].update('P')
 		return old, self.position
+	
 	def bas(self):
 		old = deepcopy(self.position)
+		if self.board[(self.position[0] + 1, self.position[1])].state == "X": return ""
 		self.board[self.position].update(' ')
 		self.position[0] += self.speed
 		self.board[self.position].update('P')
