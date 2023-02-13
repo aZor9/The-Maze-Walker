@@ -113,7 +113,7 @@ nav a:hover{
 }
 
 
-#blanco
+.blanco
 {
 width: 80%;
 border-radius:40px 40px;
@@ -124,7 +124,7 @@ text-align: center;
 align-content: center;
 }
 
-#blanco:hover
+.blanco:hover
 {
 width: 85%;
 border-radius:50px 50px;
