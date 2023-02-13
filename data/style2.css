@@ -16,6 +16,7 @@ table {
 table:hover{
   width: 77.5%;
   transition: 0.3s;
+  user-select: none;
 }
 
 th {
@@ -34,6 +35,7 @@ td {
   color: #fff;
   height: 40px;
   font-family : "Fredoka One";
+  user-select: none;
 }
 
 .colone_centrale {

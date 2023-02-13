@@ -1,6 +1,7 @@
 body {	
 	background: linear-gradient(to right, #6609a0, #0b2a46, #054202);
     font-family : "Fredoka One";
+    user-select: none;
 }
 
 .Titre {
@@ -9,11 +10,13 @@ body {
   height: 40px;
   font-size: 50px;
   font-family : "Fredoka One";
+  user-select: none;
 }
 
 
 .colone_centrale {
-	text-align: center;
+    text-align: center;
+    user-select: none;
 }
 
 .button {
