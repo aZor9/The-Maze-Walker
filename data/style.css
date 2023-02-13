@@ -112,3 +112,24 @@ nav a:hover{
   height: 1500px;
 }
 
+
+#blanco
+{
+width: 80%;
+border-radius:40px 40px;
+margin:0 auto;
+background: rgba(256, 256, 256, 0.20);
+transition: 0.5s;
+text-align: center;
+align-content: center;
+}
+
+#blanco:hover
+{
+width: 85%;
+border-radius:50px 50px;
+margin:0 auto;
+background: rgba(256, 256, 256, 0.25);
+text-align: center;
+align-content: center;
+}
