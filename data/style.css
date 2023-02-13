@@ -11,6 +11,7 @@ body {
   font-size: 50px;
   font-family : "Fredoka One";
   user-select: none;
+  -webkit-user-select: none;
 }
 
 
