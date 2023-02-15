@@ -19,36 +19,32 @@ class character():
 
 #changement de la position du personnage <- déplacement
 	def droite(self):
-		old = deepcopy(self.position)
-		if self.board[(self.position[0], self.position[1] + 1)].state == "X": return ""
+		if self.board[(self.position[0], self.position[1] + 1)].state == "X": return True
 		self.board[self.position].update(' ')
 		self.position[1] += self.speed
 		self.board[self.position].update('P')
-		return old, self.position
+		return 
 		
 	def gauche(self):
-		old = deepcopy(self.position)
-		if self.board[(self.position[0], self.position[1]-1)].state == "X": return
+		if self.board[(self.position[0], self.position[1]-1)].state == "X": return True
 		self.board[self.position].update(' ')
 		self.position[1] -= self.speed
 		self.board[self.position].update('P')
-		return old, self.position
+		return 
 		
 	def haut(self):
-		old = deepcopy(self.position)
-		if self.board[(self.position[0] - 1, self.position[1])].state == "X": return ""
+		if self.board[(self.position[0] - 1, self.position[1])].state == "X": return True
 		self.board[self.position].update(' ')
 		self.position[0] -= self.speed
 		self.board[self.position].update('P')
-		return old, self.position
+		return 
 	
 	def bas(self):
-		old = deepcopy(self.position)
-		if self.board[(self.position[0] + 1, self.position[1])].state == "X": return ""
+		if self.board[(self.position[0] + 1, self.position[1])].state == "X": return True
 		self.board[self.position].update(' ')
 		self.position[0] += self.speed
 		self.board[self.position].update('P')
-		return old, self.position
+		return 
 
 #renvoi de la vitesse avec/sans avec changement de valement
 	def vitesse(self, *args):
