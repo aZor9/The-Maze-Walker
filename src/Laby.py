@@ -119,10 +119,10 @@ class Secteur:
 
         #on casse les block N/E/S/W selon les choisis
         for d in sel:
-            if d == 'N': self.board[0][int((self.X+1)/2)].update(0)
-            elif d == 'S': self.board[-1][int((self.X+1)/2)].update(0)
-            elif d == 'W': self.board[int((self.Y+1)/2)][0].update(0)
-            elif d == 'E': self.board[int((self.Y+1)/2)][-1].update(0)
+            if d == 'N': self.board[0][self.X//2 -1].update(0)
+            elif d == 'S': self.board[-1][self.X//2 -1].update(0)
+            elif d == 'W': self.board[self.Y//2 -1][0].update(0)
+            elif d == 'E': self.board[self.Y//2 -1][-1].update(0)
             else:
                 pass
 
@@ -131,9 +131,9 @@ class Secteur:
 
 class Labyrinthe:
 
-    def __init__(self):
+    def __init__(self, Y, X):
 
-        self.Y, self.X = 41, 41
+        self.Y, self.X = Y,X
         #liste entrées
         params = [('S', 'E'), ('W', 'E'), ('W', 'S'), ('N', 'S'), (0, 0), ('N', 'S'), ('N', 'E'), ('W', 'E'), ('N', 'W')]
 
@@ -142,22 +142,24 @@ class Labyrinthe:
         for i in range(9):
             self.megaboard.append(Secteur(self.Y, self.X, params[i][0], params[i][1]))
             self.megaboard[i].gen()
-
+        
+        midY = Y//2 - 1
+        midX = X//2 - 1
         # comme le secteur 4 (le bloc) doit être relié horizontalement et verticalement aux autres:
-        self.megaboard[4][-1][21].update(0)
-        self.megaboard[4][21][-1].update(0)
-        self.megaboard[4][21][0].update(0)
-        self.megaboard[4][0][21].update(0)
+        self.megaboard[4][-1][midX].update(0)
+        self.megaboard[4][midY][-1].update(0)
+        self.megaboard[4][midY][0].update(0)
+        self.megaboard[4][0][midX].update(0)
 
-        self.megaboard[1][-1][21].update(0)
-        self.megaboard[3][21][-1].update(0)
-        self.megaboard[5][21][0].update(0)
-        self.megaboard[7][0][21].update(0)
+        self.megaboard[1][-1][midX].update(0)
+        self.megaboard[3][midY][-1].update(0)
+        self.megaboard[5][midY][0].update(0)
+        self.megaboard[7][0][midX].update(0)
 
         # le secteur 4 (le bloc) n'est pas un labyrinthe, c'est un espace vide (bordures ignorées)
-        for i in range(41):
-            for j in range(41):
-                if i != 0 and i != 40 and j != 0 and j != 40:
+        for i in range(self.X):
+            for j in range(self.Y):
+                if i != 0 and i != self.Y-1 and j != 0 and j !=self.X-1:
                     self.megaboard[4][i][j].update(0)
 
     def __getitem__(self,tpl:tuple):
@@ -198,9 +200,9 @@ class Labyrinthe:
         C'est peut-être pas clair comment j'explique mais c'est compliqué (Labyrinthe est en 4 dimensions, 2° dimension de 2° dimension)
         """
 
-        for k in range(41):
+        for k in range(self.Y):
 
-            for q in range(41):
+            for q in range(self.X):
                 pointer = str(self.megaboard[0][k][q])
                 try: pointer = int(pointer)
                 except: pass
@@ -209,7 +211,7 @@ class Labyrinthe:
                 else:
                     print(pointer, end="")
 
-            for q in range(41):
+            for q in range(self.X):
                 pointer = str(self.megaboard[1][k][q])
                 try: pointer = int(pointer)
                 except: pass
@@ -218,7 +220,7 @@ class Labyrinthe:
                 else:
                     print(pointer, end="")
 
-            for q in range(41):
+            for q in range(self.X):
                 pointer = str(self.megaboard[2][k][q])
                 try: pointer = int(pointer)
                 except: pass
@@ -229,9 +231,9 @@ class Labyrinthe:
 
             print("")
 
-        for k in range(41):
+        for k in range(self.Y):
 
-            for q in range(41):
+            for q in range(self.X):
                 pointer = str(self.megaboard[3][k][q])
                 try: pointer = int(pointer)
                 except: pass
@@ -240,7 +242,7 @@ class Labyrinthe:
                 else:
                     print(pointer, end="")
 
-            for q in range(41):
+            for q in range(self.X):
                 pointer = str(self.megaboard[4][k][q])
                 try: pointer = int(pointer)
                 except: pass
@@ -249,7 +251,7 @@ class Labyrinthe:
                 else:
                     print(pointer, end="")
 
-            for q in range(41):
+            for q in range(self.X):
                 pointer = str(self.megaboard[5][k][q])
                 try: pointer = int(pointer)
                 except: pass
@@ -260,9 +262,9 @@ class Labyrinthe:
 
             print("")
 
-        for k in range(41):
+        for k in range(self.Y):
 
-            for q in range(41):
+            for q in range(self.X):
                 pointer = str(self.megaboard[6][k][q])
                 try: pointer = int(pointer)
                 except: pass
@@ -271,7 +273,7 @@ class Labyrinthe:
                 else:
                     print(pointer, end="")
 
-            for q in range(41):
+            for q in range(self.X):
                 pointer = str(self.megaboard[7][k][q])
                 try: pointer = int(pointer)
                 except: pass
@@ -280,7 +282,7 @@ class Labyrinthe:
                 else:
                     print(pointer, end="")
 
-            for q in range(41):
+            for q in range(self.X):
                 pointer = str(self.megaboard[8][k][q])
                 try: pointer = int(pointer)
                 except: pass
@@ -354,8 +356,6 @@ class Labyrinthe:
                     self.board[i][j].update('X')
         print(self.board)
 
-    def blit(self, coos, char):
-        pass
 
 
 """
