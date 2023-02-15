@@ -21,53 +21,49 @@ Paramètres - Jouer - Quitter \n", Colors.white, interval=0.05)
   if action.lower() == "quitter":
     quit()
 
-def jeu():
+def jeu(Y,X):
   #debut()
   import Laby
   global LABY
-  LABY = Laby.Labyrinthe()
+  LABY = Laby.Labyrinthe(Y,X)
   global player
-  player = character(50, [120, 120], "", 1, LABY)
-  LABY.blit(player.haut(), 'P')
+  milieu = [Y//2 + Y , X//2 + X]
+  player = character(50, milieu, "", 1, LABY)
+  player.haut()
+  player.bas()
   print(LABY)
   
-
-def deplacements():
+def touches():
   while True:
     if is_pressed("up"):
-      LABY.blit(player.haut(), 'P')
-      #os.system("cls")
-      print(LABY)
+      if not player.haut():
+        os.system("cls")
+        print(LABY)
     if is_pressed("down"):
-      LABY.blit(player.bas(), 'P')
-      #os.system("cls")
-      print(LABY)
+      if not player.bas():
+        os.system("cls")
+        print(LABY)
     if is_pressed("left"):
-      LABY.blit(player.gauche(), 'P')
-      #os.system("cls")
-      print(LABY)
+      if not player.gauche():
+        os.system("cls")
+        print(LABY)
     if is_pressed("right"):
-      LABY.blit(player.droite(), 'P')
-      #os.system("cls")
-      print(LABY)
+      if not player.droite():
+        os.system("cls")
+        print(LABY)
+    if is_pressed("q"):
+        os._exit(0)
 
 def fctemps():
   import temps
   temps.calctemps()
 
-def quitter():
-  while True:
-    if is_pressed("q"):
-      os._exit(0)
-
-th1 = threading.Thread(target=jeu)
+th1 = threading.Thread(target=lambda : jeu(21,21))
 th2 = threading.Thread(target=fctemps)
-th3 = threading.Thread(target=deplacements)
-th4 = threading.Thread(target=quitter)
+th3 = threading.Thread(target=touches)
 
 if __name__ == "__main__":
     th1.start()
     th2.start()
     th3.start()
-    th4.start()
     #accueil()
