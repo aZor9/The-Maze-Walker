@@ -203,7 +203,7 @@ class Labyrinthe:
             if y > 2*self.Y-1:
                 newz = 6
                 y -= 2*self.Y
-            elif y > self.Y-1:
+            elif y >= self.Y-1:
                 newz = 3
                 y -= self.Y
             if x >= 2*self.X-1:
