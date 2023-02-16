@@ -1,5 +1,5 @@
 from pystyle import*
-
+from keyboard import*
 texteennemi = False
 textedegat = False
 
@@ -32,3 +32,11 @@ pour les modifier, tapez '{not textedegat}' ou 'Passer' pour passer à la suite 
     import gameplay
     gameplay.accueil()
     #print(f"Vous avez choisi {texteennemi} pour les dialogues face aux ennemis et {textedegat} pour les textes de dégât")
+
+def commandes():
+  Write.Print("Dans The Maze Walker, vous pouvez utiliser q pour quitter le jeu et les flèches directionnelles pour vous déplacer. \n\
+Appuyez sur b pour retourner à l'accueil \n", Colors.white, interval=0.05)
+  while True:
+    if is_pressed("b"):
+      import gameplay
+      gameplay.accueil()
