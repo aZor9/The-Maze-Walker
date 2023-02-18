@@ -20,6 +20,7 @@ class character():
 #changement de la position du personnage <- déplacement
 	def droite(self):
 		if self.board[(self.position[0], self.position[1] + 1)].state == "X": return True
+		elif self.board[(self.position[0], self.position[1] + 1)].state == "S": print("Sortie")
 		self.board[self.position].update(' ')
 		self.position[1] += self.speed
 		self.board[self.position].update('P')
@@ -27,6 +28,7 @@ class character():
 		
 	def gauche(self):
 		if self.board[(self.position[0], self.position[1]-1)].state == "X": return True
+		elif self.board[(self.position[0], self.position[1]-1)].state == "S": print("Sortie")
 		self.board[self.position].update(' ')
 		self.position[1] -= self.speed
 		self.board[self.position].update('P')
@@ -34,6 +36,7 @@ class character():
 		
 	def haut(self):
 		if self.board[(self.position[0] - 1, self.position[1])].state == "X": return True
+		elif self.board[(self.position[0] - 1, self.position[1])].state == "S": print("Sortie")
 		self.board[self.position].update(' ')
 		self.position[0] -= self.speed
 		self.board[self.position].update('P')
@@ -41,6 +44,7 @@ class character():
 	
 	def bas(self):
 		if self.board[(self.position[0] + 1, self.position[1])].state == "X": return True
+		elif self.board[(self.position[0] + 1, self.position[1])].state == "S": print("Sortie")
 		self.board[self.position].update(' ')
 		self.position[0] += self.speed
 		self.board[self.position].update('P')
