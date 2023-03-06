@@ -55,7 +55,7 @@ def aiedegat():
             ennemimort()
 
 def secteur4():
-    sect4 = Write.Input(f"Vous êtes désormais dans le secteur 4. \n\
+    sect4 = Write.Input("Vous êtes désormais dans le secteur 4. \n\
 Que voulez vous faire ?: \n\
 Aller à l'entrée Nord (Nord) - Aller à l'entrée Est (Est) - Aller à l'entrée Ouest (Ouest) - Aller à l'entrée Sud (Sud) - Se reposer (Reposer) - Sauvegarder", Colors.white, interval=0.05)
     if sect4.capitalize() == "Nord":

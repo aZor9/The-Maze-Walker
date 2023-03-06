@@ -1,5 +1,6 @@
 from pystyle import*
 from keyboard import*
+import os
 texteennemi = False
 textedegat = False
 
@@ -25,7 +26,7 @@ pour les modifier, tapez '{not textedegat}' ou 'Passer' pour passer à la suite 
   elif paramdegat.capitalize() != "Passer":
     textedegat = paramdegat.capitalize()
 
-  a = Write.Input(f"Les changements effectués ont été appliqués, tapez 'Retour' pour commencer à jouer\n", Colors.white, interval=0.05)
+  a = Write.Input("Les changements effectués ont été appliqués, tapez 'Retour' pour commencer à jouer\n", Colors.white, interval=0.05)
   
 
   if a.capitalize() == "Retour":
@@ -35,8 +36,10 @@ pour les modifier, tapez '{not textedegat}' ou 'Passer' pour passer à la suite 
 
 def commandes():
   Write.Print("Dans The Maze Walker, vous pouvez utiliser q pour quitter le jeu et les flèches directionnelles pour vous déplacer. \n\
+Pour afficher le temps de jeu, appuyez sur h. \n\
 Appuyez sur b pour retourner à l'accueil \n", Colors.white, interval=0.05)
   while True:
     if is_pressed("b"):
+      os.system("cls")
       import gameplay
       gameplay.accueil()

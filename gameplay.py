@@ -44,26 +44,30 @@ def touches():
     if is_pressed("up"):
       if not player.haut():
         sleep(0.3)
-        os.system("cls")
-        LABY.blind()
+        #os.system("cls")
+        #LABY.blind()
+        print(LABY)
 
     if is_pressed("down"):
       if not player.bas():
         sleep(0.3)
-        os.system("cls")
-        LABY.blind()
+        #os.system("cls")
+        #LABY.blind()
+        print(LABY)
 
     if is_pressed("left"):
       if not player.gauche():
         sleep(0.3)
-        os.system("cls")
-        LABY.blind()
+        #os.system("cls")
+        #LABY.blind()
+        print(LABY)
 
     if is_pressed("right"):
       if not player.droite():
         sleep(0.3)
-        os.system("cls")
-        LABY.blind()
+        #os.system("cls")
+        #LABY.blind()
+        print(LABY)
 
     if is_pressed("q"):
         os._exit(0)
@@ -77,5 +81,4 @@ th2 = threading.Thread(target=fctemps)
 th3 = threading.Thread(target=touches)
 
 if __name__ == "__main__":
-    #accueil()
-    jeu(21,21)
+    accueil()
