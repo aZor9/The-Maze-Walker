@@ -16,6 +16,7 @@ table {
 table:hover{
   width: 77.5%;
   transition: 0.3s;
+  user-select: none;
 }
 
 th {
@@ -34,6 +35,7 @@ td {
   color: #fff;
   height: 40px;
   font-family : "Fredoka One";
+  user-select: none;
 }
 
 .colone_centrale {
@@ -52,22 +54,22 @@ td {
   color: #fff;
   background-color: #329F5B;
   border: none;
-  border-radius: 25px;
+  border-radius: 15px;
   box-shadow: 0 7px #7D05C7;
   transition: 0.3s;
 }
 
 .button:hover {
-  padding: 20px 45px;
+  padding: 20px 40px;
 	background-color: #0B7335;
-	box-shadow: 0 9px #6609A0;
+	box-shadow: 0 6px #6609A0;
   transition: 0.3s;
 }
 
 .button:active {
   background-color: #075313;
-  box-shadow: 0 5px #6609A0;
-  transform: translateY(4px);
+  box-shadow: 0 3px #6609A0;
+  transform: translateY(3px);
   transition: 0.2s;
 }
 

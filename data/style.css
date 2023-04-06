@@ -1,6 +1,7 @@
 body {	
 	background: linear-gradient(to right, #6609a0, #0b2a46, #054202);
     font-family : "Fredoka One";
+    user-select: none;
 }
 
 .Titre {
@@ -9,11 +10,14 @@ body {
   height: 40px;
   font-size: 50px;
   font-family : "Fredoka One";
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 
 .colone_centrale {
-	text-align: center;
+    text-align: center;
+    user-select: none;
 }
 
 .button {
@@ -108,3 +112,26 @@ nav a:hover{
   height: 1500px;
 }
 
+
+.blanco
+{
+font-size: 22px;
+font-family : "Teko";
+width: 82%;
+border-radius:40px 40px;
+margin:0 auto;
+background: rgba(256, 256, 256, 0.20);
+transition: 0.5s;
+text-align: center;
+align-content: center;
+}
+
+.blanco:hover
+{
+width: 85%;
+border-radius:50px 50px;
+margin:0 auto;
+background: rgba(256, 256, 256, 0.25);
+text-align: center;
+align-content: center;
+}
