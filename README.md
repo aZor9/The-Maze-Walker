@@ -15,3 +15,4 @@ en remplacant l'instruction "py" par "python3"
 
 -> Dans le jeu, appuyer sur la touche 'q' pour quitter à tout moment.
 Si la touche n'a pas d'effets, fermer la fenêtre du programme manuellement;
+Vous pouvez également appuyer sur la touche 'h' pour voir votre temps de jeu passé dans le labyrinthe.
