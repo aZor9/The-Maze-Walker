@@ -37,7 +37,6 @@ def jeu(Y,X):
   milieu = (Y, X)
   player = character(50, milieu, "", 1, LABY)
   LABY.set_player(player)
-  print(LABY)
   th3.start()
   
 def touches():
@@ -82,7 +81,7 @@ def wincase():
   send('h')
   os._exit(0)
 
-th1 = threading.Thread(target=lambda : jeu(7, 7))
+th1 = threading.Thread(target=lambda : jeu(23, 23))
 th2 = threading.Thread(target=fctemps)
 th3 = threading.Thread(target=touches)
 
