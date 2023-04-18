@@ -18,18 +18,18 @@ def __convertisseur__():
   minutes = tp/60
   if minutes < 1:
     if secondes == 1:
-      affichagetp = f"Vous avez joué {secondes} seconde."
+      affichagetp = f"Vous avez joué pendant {secondes} seconde."
     else:
-      affichagetp = f"Vous avez joué {secondes} secondes."
+      affichagetp = f"Vous avez joué pendant {secondes} secondes."
   else:
     if minutes == 1:
-      affichagetp = f"Vous avez joué {floor(minutes)} minute et {secondes} secondes."
+      affichagetp = f"Vous avez joué pendant {floor(minutes)} minute et {secondes} secondes."
     else:
-      affichagetp = f"Vous avez joué {floor(minutes)} minutes et {secondes} secondes."
+      affichagetp = f"Vous avez joué pendant {floor(minutes)} minutes et {secondes} secondes."
   if minutes > 60:
     heures = tp/3600
     minutes = tp%60
-    affichagetp = f"Vous avez joué {floor(heures)} heures, {floor(minutes)} minutes et {secondes} secondes."
+    affichagetp = f"Vous avez joué pendant {floor(heures)} heures, {floor(minutes)} minutes et {secondes} secondes."
   return affichagetp
 
 if __name__ == "__main__":
