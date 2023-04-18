@@ -3,9 +3,9 @@ labyrinthe
 
 https://azor9.github.io/The-Maze-Walker/ 
 
-requirements(.bat) -> Installe les modules nécéssaires au fonctionnement du jeu
-refresh(.bat) -> Si votre ordinateur ralenti à cause du jeu, exécuter ce fichier
-run(.bat) -> Fichier a exécuter pour jouer au jeu
+requirements(.bat) -> Installe les modules nécéssaires au fonctionnement du jeu <br>
+refresh(.bat) -> Si votre ordinateur ralenti à cause du jeu, exécuter ce fichier <br>
+run(.bat) -> Fichier a exécuter pour jouer au jeu <br>
 
 Toutes les commandes reposent sur le fait que py launcher est installé.
 Si vous rencontrez des problèmes avec les fichiers .bat, remplacez "py" 
