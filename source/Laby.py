@@ -1,5 +1,5 @@
 from random import choice, randint
-from src.Pile import Pile
+from Pile import Pile
 from copy import deepcopy
 from os import _exit
 from time import sleep

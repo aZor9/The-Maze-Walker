@@ -8,8 +8,6 @@ from time import sleep
 import os
 
 def accueil():
-  th1.start()
-  th2.start()
   Write.Print("Bienvenue dans The Maze Walker \n", Colors.white, interval=0.05)
   action = Write.Input("Que souhaitez-vous faire ? \n\
 Paramètres - Commandes - Jouer - Quitter \n", Colors.white, interval=0.05)
@@ -29,7 +27,7 @@ Paramètres - Commandes - Jouer - Quitter \n", Colors.white, interval=0.05)
     param.commandes()
 def jeu(Y,X):
   #debut()
-  from src.Laby import Labyrinthe
+  from Laby import Labyrinthe
   global LABY
   LABY = Labyrinthe(Y,X)
   LABY.gen()
