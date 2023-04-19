@@ -1,7 +1,9 @@
 from pystyle import*
 from copy import deepcopy
 from random import randrange
-from param import textedegat, texteennemi
+
+"""
+from gameplay_lib.param import textedegat, texteennemi
 
 repliques = ["Tiens (BAM) prends ça ! \n", "Ça n'en finit plus ! \n", "Je finirai par tous les avoir \n", 
             "Excusez-moi je pense qu'on essaye de vous tuer, ah oui c'est moi (PAW) \n", "Mange toi ça ! \n"]
@@ -13,6 +15,7 @@ repdegats = ["Aie, ça ça fait mal ! \n", "ouch, il m'a eu \n", "Je me vengerai
             "Tu ne paies rien pour attendre \n", "Ça c'était un coup de chance pour toi ! \n"]
 global repdegatsliste
 repdegatsliste = deepcopy(repdegats)
+"""
 
 def debut():
     texte = Center.XCenter(Box.DoubleCube("30 septembre 2206\n\
@@ -24,6 +27,7 @@ J’essaierai ce soir…\n"))
     Write.Print(texte, Colors.white, interval=0.03)
     print("")
 
+"""
 def ennemi1():
     Write.Print("AH !! En plus il y a des ennemis ?! \n", Colors.white, interval=0.05)
 
@@ -53,26 +57,4 @@ def aiedegat():
         else:
             repdegatsliste = deepcopy(repdegats)
             ennemimort()
-
-def secteur4():
-    sect4 = Write.Input("Vous êtes désormais dans le secteur 4. \n\
-Que voulez vous faire ?: \n\
-Aller à l'entrée Nord (Nord) - Aller à l'entrée Est (Est) - Aller à l'entrée Ouest (Ouest) - Aller à l'entrée Sud (Sud) - Se reposer (Reposer) - Sauvegarder", Colors.white, interval=0.05)
-    if sect4.capitalize() == "Nord":
-        #fonction qui mène au Nord
-        pass
-    elif sect4.capitalize() == "Est":
-        #fonction qui mène au Est
-        pass
-    elif sect4.capitalize() == "Ouest":
-        #fonction qui mène au Ouest
-        pass
-    elif sect4.capitalize() == "Sud":
-        #fonction qui mène au Sud
-        pass
-    elif sect4.capitalize() == "Reposer":
-        #fonction qui permet de se Reposer
-        pass
-    elif sect4.capitalize() == "Sauvegarder":
-        #fonction qui sauvegarde
-        pass
+"""

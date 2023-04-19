@@ -1,8 +1,9 @@
 from pystyle import *
-from textes import debut
-import param
+from gameplay_lib.textes import debut
+import gameplay_lib.param as param
 import threading
-from personnage import character
+from gameplay_lib.personnage import character
+import gameplay_lib.temps as temps
 from keyboard import is_pressed
 from time import sleep
 import os
@@ -10,75 +11,83 @@ import os
 def accueil():
   Write.Print("Bienvenue dans The Maze Walker \n", Colors.white, interval=0.05)
   action = Write.Input("Que souhaitez-vous faire ? \n\
-Paramètres - Commandes - Jouer - Quitter \n", Colors.white, interval=0.05)
+Paramètres (P) - Commandes (C) - Jouer (J) - Quitter (Q)\n", Colors.white, interval=0.05)
 
-  if action.lower() == "parametres":
+  if (action.lower() == "parametres") or (action.lower() == "p"):
+    os.system("cls")
     param.parametres()
 
-  if action.lower() == "jouer":
+  if (action.lower()) == "jouer" or (action.lower() == "j"):
+    os.system("cls")
+    niveau = param.returnnv()
+    jeu(niveau[0], niveau[1])
     th1.start()
-    th2.start()
 
-  if action.lower() == "quitter":
+  if (action.lower()) == "quitter" or (action.lower() == "q"):
     quit()
 
-  if action.lower() == "commandes":
+  if (action.lower()) == "commandes" or (action.lower() == "c"):
+    os.system("cls")
     param.commandes()
 
-def jeu(Y,X):
+def jeu(Y = 21,X = 21):
   #debut()
-  import Laby
+  sleep(1)
+  os.system("cls")
+  from src.Laby import Labyrinthe
   global LABY
-  LABY = Laby.Labyrinthe(Y,X)
+  LABY = Labyrinthe(Y,X)
+  LABY.gen()
   global player
-  milieu = [Y//2 + Y , X//2 + X]
+  milieu = (Y, X)
   player = character(50, milieu, "", 1, LABY)
   LABY.set_player(player)
-  player.haut()
-  player.bas()
   print(LABY)
-  th3.start()
+  th2.start()
   
 def touches():
   while True:
     if is_pressed("up"):
-      if not player.haut():
-        sleep(0.3)
-        #os.system("cls")
-        #LABY.blind()
-        print(LABY)
+      LABY.move(player.haut())
+      sleep(0.3)
+      os.system("cls")
+      LABY.blind()
+      #print(LABY)
 
     if is_pressed("down"):
-      if not player.bas():
-        sleep(0.3)
-        #os.system("cls")
-        #LABY.blind()
-        print(LABY)
+      LABY.move(player.bas())
+      sleep(0.3)
+      os.system("cls")
+      LABY.blind()
+      #print(LABY)
 
     if is_pressed("left"):
-      if not player.gauche():
-        sleep(0.3)
-        #os.system("cls")
-        #LABY.blind()
-        print(LABY)
+      LABY.move(player.gauche())
+      sleep(0.3)
+      os.system("cls")
+      LABY.blind()
+      #print(LABY)
 
     if is_pressed("right"):
-      if not player.droite():
-        sleep(0.3)
-        #os.system("cls")
-        #LABY.blind()
-        print(LABY)
+      LABY.move(player.droite())
+      sleep(0.3)
+      os.system("cls")
+      LABY.blind()
+      #print(LABY)
 
     if is_pressed("q"):
         os._exit(0)
 
 def fctemps():
-  import temps
   temps.calctemps()
 
-th1 = threading.Thread(target=lambda : jeu(21,21))
-th2 = threading.Thread(target=fctemps)
-th3 = threading.Thread(target=touches)
+def wincase():
+  print("Vous avez gagné !!")
+  print(temps.call())
+  os._exit(0)
+
+th1 = threading.Thread(target=fctemps)
+th2 = threading.Thread(target=touches)
 
 if __name__ == "__main__":
     accueil()
