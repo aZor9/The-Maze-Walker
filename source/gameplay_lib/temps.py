@@ -3,15 +3,18 @@ from keyboard import is_pressed
 from math import floor
 
 def calctemps():
+  global tempsepoch
   tempsepoch = time()
-  global tp
-  tp = 0
   while True:
     if is_pressed("h"):
-      temps2 = time()
-      tp = int(temps2 - tempsepoch)
-      __convertisseur__()
-      sleep(0.7)
+      call()
+
+def call():
+  temps2 = time()
+  global tp
+  tp = int(temps2 - tempsepoch)
+  __convertisseur__()
+  sleep(0.7)
 
 def __convertisseur__():
   secondes = tp%60
@@ -30,7 +33,7 @@ def __convertisseur__():
     heures = tp/3600
     minutes = tp%60
     affichagetp = f"Vous avez joué pendant {floor(heures)} heures, {floor(minutes)} minutes et {secondes} secondes."
-  return affichagetp
+  print(affichagetp)
 
 if __name__ == "__main__":
   calctemps()

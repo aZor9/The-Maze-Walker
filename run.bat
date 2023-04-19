@@ -1,3 +1,4 @@
-cd source
-py gameplay.py
+@echo off
+cls
+py source/gameplay.py
 pause

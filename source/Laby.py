@@ -159,5 +159,26 @@ class Labyrinthe:
                     else:
                         line += str(pointer)
                 except:
-                    line += '█'
+                    line += ' '
+            print(line) # gestion de l'affichage si mur ou vide
+
+    def first_print(self):
+
+        for by in ([fy for fy in range(-10, 11)]):
+            line = ""
+            for bx in ([fx for fx in range(-10, 11)]):
+                if (by in (-10, 10)) or (bx in (-10, 10)):
+                    line += '▒'
+                elif (by in (-9, -8, 8, 9)) or (bx in (-9, -8, 8, 9)):
+                    line += '░'
+                else:
+                    try:
+                        pointer = str(self.board[self.pcoos[0] + by][self.pcoos[1] + bx])
+                        try: pointer = int(pointer)
+                        except : pass
+                        if pointer in (0, 'S'): line += ' '
+                        elif pointer == 'X': line += '█'
+                        else: line += str(pointer)
+                    except:
+                        line += '█'
             print(line) # gestion de l'affichage si mur ou vide
