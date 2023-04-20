@@ -9,6 +9,7 @@ from gameplay import wincase
 class Case:
 
     def __init__(self, e = False):
+        self.ttl_trace = 0
         if not e:
             self.state = 'X'
         else:
@@ -26,6 +27,19 @@ class Case:
     def update(self, e):
         self.state = e
         return self
+
+    def set_trace(self, duree = 5, chg_state = 2):
+        self.state = '+'
+        self.ttl_trace = duree
+        self.chg_state = chg_state
+
+    def upt_trace(self):
+        if self.ttl_trace > 0:
+            self.ttl_trace -= 1
+            if self.ttl_trace = self.chg_state:
+                self.state = '.'
+            elif self.ttl_trace == 0:
+                self.state = 0
 
 class Labyrinthe:
 
