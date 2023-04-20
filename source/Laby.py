@@ -189,15 +189,16 @@ class Labyrinthe:
         return ""
 
     def renderv2(self):
+        print("renderv2")
         rdrv2_ylst = [self.pcoos[0]+dy for dy in (-2, -1, 0, 1, 2)]
-        rdrv2_xlst = [self.pcoos[0]+dx for dx in (-2, -1, 0, 1, 2)]
+        rdrv2_xlst = [self.pcoos[1]+dx for dx in (-2, -1, 0, 1, 2)]
         print(rdrv2_ylst, rdrv2_xlst)
         output = ""
         for d in range(len(self.board)):
             line = ""
             for f in range(len(self.board[0])):
-                if (d in rdrv2_ylst) or (f in rdrv2_xlst) or (str(self.board[d][f]) == '+') or (str(self.board[d][f]) == '•'):
-                    pointer = str(self.board[q][s])
+                if ((d in rdrv2_ylst) and (f in rdrv2_xlst)) or (str(self.board[d][f]) == '+') or (str(self.board[d][f]) == '•'):
+                    pointer = str(self.board[d][f])
                     try: pointer = int(pointer)
                     except : pass
                     if pointer in (0, 'S'): line += ' '
@@ -205,7 +206,6 @@ class Labyrinthe:
                     else: line += str(pointer)
                 else:
                     line += ' '
-
-            output += line # gestion de l'affichage si mur ou vide
+            output += line + '\n'
         print(output)
         return ""
