@@ -14,6 +14,7 @@ class Case:
             self.state = 'X'
         else:
             self.state = e
+        self.trace_lst = []
 
     def __str__(self):
         return str(self.state)
@@ -36,7 +37,7 @@ class Case:
     def upt_trace(self):
         if self.ttl_trace > 0:
             self.ttl_trace -= 1
-            if self.ttl_trace = self.chg_state:
+            if self.ttl_trace == self.chg_state:
                 self.state = '.'
             elif self.ttl_trace == 0:
                 self.state = 0
@@ -198,15 +199,13 @@ class Labyrinthe:
                         else: line += str(pointer)
                     except:
                         line += '█'
-            output += line
+            output += line + '\n'
         print(output)
         return ""
 
     def renderv2(self):
-        print("renderv2")
         rdrv2_ylst = [self.pcoos[0]+dy for dy in (-2, -1, 0, 1, 2)]
         rdrv2_xlst = [self.pcoos[1]+dx for dx in (-2, -1, 0, 1, 2)]
-        print(rdrv2_ylst, rdrv2_xlst)
         output = ""
         for d in range(len(self.board)):
             line = ""

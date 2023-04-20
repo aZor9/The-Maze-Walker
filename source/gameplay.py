@@ -115,4 +115,4 @@ th2 = threading.Thread(target=touches)
 
 if __name__ == "__main__":
     #accueil
-    jeu() # Only while developpement || Will be removed on release (v3.0)
+    jeu(13, 13) # Only while developpement || Will be removed on release (v3.0)
