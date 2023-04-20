@@ -9,6 +9,7 @@ from gameplay import wincase
 class Case:
 
     def __init__(self, e = False):
+        self.ttl_trace = 0
         if not e:
             self.state = 'X'
         else:
@@ -27,6 +28,19 @@ class Case:
         self.state = e
         return self
 
+    def set_trace(self, duree = 5, chg_state = 2):
+        self.state = '+'
+        self.ttl_trace = duree
+        self.chg_state = chg_state
+
+    def upt_trace(self):
+        if self.ttl_trace > 0:
+            self.ttl_trace -= 1
+            if self.ttl_trace == self.chg_state:
+                self.state = '•'
+            elif self.ttl_trace == 0:
+                self.state = 0
+
 class Labyrinthe:
 
     def __init__(self, Xsecteur: int, Ysecteur: int, sortie = False) -> None:
@@ -38,8 +52,10 @@ class Labyrinthe:
         self.pcoos = []
         self.plast = 0
         self.mcords  = (int((self.Y-1)/2), int((self.X-1)/2))
+        self.trace_lst = []
 
     def __str__(self):
+        output = ""
         for q in range(len(self.board)):
             line = ""
             for s in range(len(self.board[0])):
@@ -50,7 +66,8 @@ class Labyrinthe:
                 elif pointer == 'X': line += '█'
                 else:
                     line += str(pointer)
-            print(line) # gestion de l'affichage si mur ou vide
+            output += line
+        print(output)
         return ""
 
     def __getitem__(self, i):
@@ -135,8 +152,15 @@ class Labyrinthe:
         self.board[self.pcoos[0]][self.pcoos[1]].update('P')
 
     def move(self, newcoos):
-        self.board[self.pcoos[0]][self.pcoos[1]].update(deepcopy(self.plast))
-        self.plast = deepcopy(self.board[newcoos[0]][newcoos[1]])
+        for trc in self.trace_lst:
+            trc.upt_trace()
+            if trc.ttl_trace == 0:
+                self.trace_lst.remove(trc)
+
+        #self.board[self.pcoos[0]][self.pcoos[1]].update(deepcopy(self.plast))
+        self.board[self.pcoos[0]][self.pcoos[1]].set_trace(7)
+        self.trace_lst.append(self.board[self.pcoos[0]][self.pcoos[1]])
+        #self.plast = deepcopy(self.board[newcoos[0]][newcoos[1]])
         self.board[newcoos[0]][newcoos[1]].update('P')
         self.pcoos = [deepcopy(newcoos[0]), deepcopy(newcoos[1])]
         # END CASE //
@@ -145,8 +169,8 @@ class Labyrinthe:
             wincase()
 
 
-    def blind(self):
-
+        """def blind(self):
+        output = ""
         for by in (-2, -1, 0, 1, 2):
             line = ""
             for bx in (-2, -1, 0, 1, 2):
@@ -160,10 +184,11 @@ class Labyrinthe:
                         line += str(pointer)
                 except:
                     line += ' '
-            print(line) # gestion de l'affichage si mur ou vide
+            output += line
+        print(line)"""
 
     def first_print(self):
-
+        output = ""
         for by in ([fy for fy in range(-10, 11)]):
             line = ""
             for bx in ([fx for fx in range(-10, 11)]):
@@ -181,7 +206,26 @@ class Labyrinthe:
                         else: line += str(pointer)
                     except:
                         line += '█'
-            print(line) # gestion de l'affichage si mur ou vide
+            output += line + '\n'
+        print(output)
+        return ""
 
     def renderv2(self):
-        pass
+        rdrv2_ylst = [self.pcoos[0]+dy for dy in (-2, -1, 0, 1, 2)]
+        rdrv2_xlst = [self.pcoos[1]+dx for dx in (-2, -1, 0, 1, 2)]
+        output = ""
+        for d in range(len(self.board)):
+            line = ""
+            for f in range(len(self.board[0])):
+                if ((d in rdrv2_ylst) and (f in rdrv2_xlst)) or (str(self.board[d][f]) == '+') or (str(self.board[d][f]) == '•'):
+                    pointer = str(self.board[d][f])
+                    try: pointer = int(pointer)
+                    except : pass
+                    if pointer in (0, 'S'): line += ' '
+                    elif pointer == 'X': line += '█'
+                    else: line += str(pointer)
+                else:
+                    line += ' '
+            output += line + '\n'
+        print(output)
+        return ""
