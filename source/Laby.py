@@ -14,7 +14,6 @@ class Case:
             self.state = 'X'
         else:
             self.state = e
-        self.trace_lst = []
 
     def __str__(self):
         return str(self.state)
@@ -38,7 +37,7 @@ class Case:
         if self.ttl_trace > 0:
             self.ttl_trace -= 1
             if self.ttl_trace == self.chg_state:
-                self.state = '.'
+                self.state = '•'
             elif self.ttl_trace == 0:
                 self.state = 0
 
@@ -53,6 +52,7 @@ class Labyrinthe:
         self.pcoos = []
         self.plast = 0
         self.mcords  = (int((self.Y-1)/2), int((self.X-1)/2))
+        self.trace_lst = []
 
     def __str__(self):
         output = ""
@@ -152,8 +152,15 @@ class Labyrinthe:
         self.board[self.pcoos[0]][self.pcoos[1]].update('P')
 
     def move(self, newcoos):
-        self.board[self.pcoos[0]][self.pcoos[1]].update(deepcopy(self.plast))
-        self.plast = deepcopy(self.board[newcoos[0]][newcoos[1]])
+        for trc in self.trace_lst:
+            trc.upt_trace()
+            if trc.ttl_trace == 0:
+                self.trace_lst.remove(trc)
+
+        #self.board[self.pcoos[0]][self.pcoos[1]].update(deepcopy(self.plast))
+        self.board[self.pcoos[0]][self.pcoos[1]].set_trace(7)
+        self.trace_lst.append(self.board[self.pcoos[0]][self.pcoos[1]])
+        #self.plast = deepcopy(self.board[newcoos[0]][newcoos[1]])
         self.board[newcoos[0]][newcoos[1]].update('P')
         self.pcoos = [deepcopy(newcoos[0]), deepcopy(newcoos[1])]
         # END CASE //
@@ -162,7 +169,7 @@ class Labyrinthe:
             wincase()
 
 
-    def blind(self):
+        """def blind(self):
         output = ""
         for by in (-2, -1, 0, 1, 2):
             line = ""
@@ -178,7 +185,7 @@ class Labyrinthe:
                 except:
                     line += ' '
             output += line
-        print(line)
+        print(line)"""
 
     def first_print(self):
         output = ""
