@@ -40,6 +40,7 @@ class Labyrinthe:
         self.mcords  = (int((self.Y-1)/2), int((self.X-1)/2))
 
     def __str__(self):
+        output = ""
         for q in range(len(self.board)):
             line = ""
             for s in range(len(self.board[0])):
@@ -50,7 +51,8 @@ class Labyrinthe:
                 elif pointer == 'X': line += '█'
                 else:
                     line += str(pointer)
-            print(line) # gestion de l'affichage si mur ou vide
+            output += line
+        print(output)
         return ""
 
     def __getitem__(self, i):
@@ -146,7 +148,7 @@ class Labyrinthe:
 
 
     def blind(self):
-
+        output = ""
         for by in (-2, -1, 0, 1, 2):
             line = ""
             for bx in (-2, -1, 0, 1, 2):
@@ -160,10 +162,11 @@ class Labyrinthe:
                         line += str(pointer)
                 except:
                     line += ' '
-            print(line) # gestion de l'affichage si mur ou vide
+            output += line
+        print(line)
 
     def first_print(self):
-
+        output = ""
         for by in ([fy for fy in range(-10, 11)]):
             line = ""
             for bx in ([fx for fx in range(-10, 11)]):
@@ -181,7 +184,27 @@ class Labyrinthe:
                         else: line += str(pointer)
                     except:
                         line += '█'
-            print(line) # gestion de l'affichage si mur ou vide
+            output += line
+        print(output)
+        return ""
 
     def renderv2(self):
-        pass
+        rdrv2_ylst = [self.pcoos[0]+dy for dy in (-2, -1, 0, 1, 2)]
+        rdrv2_xlst = [self.pcoos[0]+dx for dx in (-2, -1, 0, 1, 2)]
+        output = ""
+        for d in range(len(self.board)):
+            line = ""
+            for f in range(len(self.board[0])):
+                if (d in rdrv2_ylst) or (f in rdrv2_xlst):
+                    pass
+                else:
+                    pointer = str(self.board[q][s])
+                    try: pointer = int(pointer)
+                    except : pass
+                    if pointer in (0, 'S'): line += ' '
+                    elif pointer == 'X': line += '█'
+                else:
+                    line += str(pointer)
+            output += line # gestion de l'affichage si mur ou vide
+        print(output)
+        return ""
