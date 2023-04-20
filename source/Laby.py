@@ -139,7 +139,7 @@ class Labyrinthe:
         self.plast = deepcopy(self.board[newcoos[0]][newcoos[1]])
         self.board[newcoos[0]][newcoos[1]].update('P')
         self.pcoos = [deepcopy(newcoos[0]), deepcopy(newcoos[1])]
-        # END CASE // 
+        # END CASE //
         if str(self.plast) == 'S':
             # LE JOUEUR PASSE PAR LA SORTIE
             wincase()
@@ -182,3 +182,6 @@ class Labyrinthe:
                     except:
                         line += '█'
             print(line) # gestion de l'affichage si mur ou vide
+
+    def renderv2(self):
+        pass
