@@ -41,7 +41,7 @@ Paramètres (P) - Commandes (C) - Jouer (J) - Quitter (Q)\n", Colors.white, inte
       system("cls")
       param.commandes()
       cmd = True
-    
+
     elif (action.casefold() == 'a'):
       system("start ./source/index.html")
       action = ""
@@ -60,36 +60,40 @@ def jeu(Y = 21,X = 21):
   LABY.set_player(player)
   LABY.first_print()
   th2.start()
-  
+
 def touches():
   while True:
     if is_pressed("up"):
       LABY.move(player.haut())
       sleep(0.3)
       system("cls")
-      LABY.blind()
+      #LABY.blind()
       #print(LABY)
+      LABY.renderv2()
 
     elif is_pressed("down"):
       LABY.move(player.bas())
       sleep(0.3)
       system("cls")
-      LABY.blind()
+      #LABY.blind()
       #print(LABY)
+      LABY.renderv2()
 
     elif is_pressed("left"):
       LABY.move(player.gauche())
       sleep(0.3)
       system("cls")
-      LABY.blind()
+      #LABY.blind()
       #print(LABY)
+      LABY.renderv2()
 
     elif is_pressed("right"):
       LABY.move(player.droite())
       sleep(0.3)
       system("cls")
-      LABY.blind()
+      #LABY.blind()
       #print(LABY)
+      LABY.renderv2()
 
     elif is_pressed("q"):
         _exit(0)
@@ -110,4 +114,5 @@ th1 = threading.Thread(target=fctemps)
 th2 = threading.Thread(target=touches)
 
 if __name__ == "__main__":
-    accueil()
+    #accueil
+    jeu() # Only while developpement || Will be removed on release (v3.0)
