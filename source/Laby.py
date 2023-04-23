@@ -169,50 +169,10 @@ class Labyrinthe:
             wincase()
 
 
-        """def blind(self):
-        output = ""
-        for by in (-2, -1, 0, 1, 2):
-            line = ""
-            for bx in (-2, -1, 0, 1, 2):
-                try:
-                    pointer = str(self.board[self.pcoos[0] + by][self.pcoos[1] + bx])
-                    try: pointer = int(pointer)
-                    except : pass
-                    if pointer in (0, 'S'): line += ' '
-                    elif pointer == 'X': line += '█'
-                    else:
-                        line += str(pointer)
-                except:
-                    line += ' '
-            output += line
-        print(line)"""
-
-    def first_print(self):
-        output = ""
-        for by in ([fy for fy in range(-10, 11)]):
-            line = ""
-            for bx in ([fx for fx in range(-10, 11)]):
-                if (by in (-10, 10)) or (bx in (-10, 10)):
-                    line += '▒'
-                elif (by in (-9, -8, 8, 9)) or (bx in (-9, -8, 8, 9)):
-                    line += '░'
-                else:
-                    try:
-                        pointer = str(self.board[self.pcoos[0] + by][self.pcoos[1] + bx])
-                        try: pointer = int(pointer)
-                        except : pass
-                        if pointer in (0, 'S'): line += ' '
-                        elif pointer == 'X': line += '█'
-                        else: line += str(pointer)
-                    except:
-                        line += '█'
-            output += line + '\n'
-        print(output)
-        return ""
-
     def renderv2(self):
         rdrv2_ylst = [self.pcoos[0]+dy for dy in (-2, -1, 0, 1, 2)]
         rdrv2_xlst = [self.pcoos[1]+dx for dx in (-2, -1, 0, 1, 2)]
+
         output = ""
         for d in range(len(self.board)):
             line = ""
@@ -224,6 +184,32 @@ class Labyrinthe:
                     if pointer in (0, 'S'): line += ' '
                     elif pointer == 'X': line += '█'
                     else: line += str(pointer)
+                else:
+                    line += ' '
+            output += line + '\n'
+        print(output)
+        return ""
+
+    def renderv2_firstprint(self):
+        rdrv2_ylst = [self.pcoos[0]+dy for dy in [ldy for ldy in range(-7, 7, 1)]]
+        rdrv2_xlst = [self.pcoos[1]+dx for dx in [ldx for ldx in range(-7, 7, 1)]]
+
+        lfog_lst = [self.pcoos[0]+lfg for lfg in [Lfog for Lfog in range(-9, 9, 1)]]
+        fog_lst = [self.pcoos[0]+fg for fg in [Fog for Fog in range(-10, 10, 1)]]
+
+        output = ""
+        for d in range(len(self.board)):
+            line = ""
+            for f in range(len(self.board[0])):
+                if ((d in rdrv2_ylst) and (f in rdrv2_xlst)):
+                    pointer = str(self.board[d][f])
+                    try: pointer = int(pointer)
+                    except : pass
+                    if pointer in (0, 'S'): line += ' '
+                    elif pointer == 'X': line += '█'
+                    else: line += str(pointer)
+                elif ((d in lfog_lst) and (f in lfog_lst)): line += '░'
+                elif ((d in fog_lst) and (f in fog_lst)): line += '▒'
                 else:
                     line += ' '
             output += line + '\n'
