@@ -1,7 +1,7 @@
 # The-Maze-Walker : Le labyrinthe
 
 ### Site Web
-[lien](https://azor9.github.io/The-Maze-Walker/source/index.html) de notre site.
+[lien](https://azor9.github.io/The-Maze-Walker/) de notre site.
 il est composé : 
 - présentation du jeu
 - histoire du jeu

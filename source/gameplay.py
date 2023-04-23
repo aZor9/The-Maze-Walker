@@ -58,7 +58,7 @@ def jeu(Y = 21,X = 21):
   milieu = (Y, X)
   player = character(50, milieu, "", 1, LABY)
   LABY.set_player(player)
-  LABY.first_print()
+  LABY.renderv2_firstprint()
   th2.start()
 
 def touches():
@@ -114,4 +114,4 @@ th1 = threading.Thread(target=fctemps)
 th2 = threading.Thread(target=touches)
 
 if __name__ == "__main__":
-  acceuil()
+  accueil()
