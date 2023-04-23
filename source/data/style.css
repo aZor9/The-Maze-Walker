@@ -99,6 +99,7 @@ nav a{
     color: black;
     border-bottom: 2px solid transparent;
     padding: 10px 0px;
+    border-bottom: 4px solid white;
 }
 
 nav a:hover{
